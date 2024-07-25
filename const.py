@@ -49,7 +49,7 @@ EXCLUDED_EXTS = [
         "tictactoe.py",
         "voice.py",
         "configcmds.py",
-        "spotify.py"]
+        "presence.py",]
     
 DELETE_BTN = Button(style=ButtonStyle.RED, custom_id="delete", emoji="🗑️")
 

@@ -107,46 +107,10 @@ async def on_startup():
     guild_list.set_index("id", inplace=True)
     print(guild_list)
 
-    while True:  # Select a random activity, which will change every 60 seconds
-        random_activity = randint(1, 3)
-        if random_activity == 1:
-            await bot.change_presence(
-                activity=inter.Activity(
-                    name=random.choice(PLAYINSTATUS),
-                    type=inter.ActivityType.PLAYING,
-                )
-            )
-            await asyncio.sleep(60)
-        elif random_activity == 2:
-            await bot.change_presence(
-                activity=inter.Activity(
-                    name=random.choice(WATCHINGSTATUS),
-                    type=inter.ActivityType.WATCHING,
-                )
-            )
-            await asyncio.sleep(60)
-        elif random_activity == 3:
-            if str(len(bot.guilds)).endswith("1") and not str(len(bot.guilds)).endswith("11"):
-                await bot.change_presence(
-                    activity=inter.Activity(
-                        type=inter.ActivityType.STREAMING,
-                        url="https://www.twitch.tv/pre1ude0",
-                        name="to {0} server".format(len(bot.guilds)),
-                    )
-                )
-            else:
-                await bot.change_presence(
-                    activity=inter.Activity(
-                        type=inter.ActivityType.STREAMING,
-                        name="to {0} servers".format(len(bot.guilds)),
-                        url="https://www.twitch.tv/pre1ude0",
-                    )
-                )
-            await asyncio.sleep(60)
-
 
 secret_TOKEN = os.environ["TOKEN"]
 try:
+    bot.load_extension("data.presence")
     bot.start(secret_TOKEN)
 except Exception as e:
     os.system("kill 1")
